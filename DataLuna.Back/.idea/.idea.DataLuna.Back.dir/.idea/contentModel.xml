@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\csgo_proj\DataLuna.Back" t="IncludeRecursive">
+      <e p="appsettings.Development.json" t="Include" />
+      <e p="appsettings.json" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Common" t="Include">
+        <e p="Exceptions" t="Include">
+          <e p="HttpStatusCodeException.cs" t="Include" />
+        </e>
+        <e p="Players" t="Include">
+          <e p="CreatePlayerCommand.cs" t="Include" />
+          <e p="GetAllPlayersResponse.cs" t="Include" />
+          <e p="PlayerDto.cs" t="Include" />
+        </e>
+        <e p="Teams" t="Include">
+          <e p="CreateTeamCommand.cs" t="Include" />
+          <e p="GetAllTeamsResponse.cs" t="Include" />
+          <e p="TeamDto.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Controllers" t="Include">
+        <e p="Admin" t="Include">
+          <e p="AdminPlayerController.cs" t="Include" />
+          <e p="AdminTeamController.cs" t="Include" />
+        </e>
+        <e p="SteamOAuthController.cs" t="Include" />
+      </e>
+      <e p="DataLuna.Back.csproj" t="IncludeRecursive" />
+      <e p="Domain" t="Include">
+        <e p="FinishedMatch.cs" t="Include" />
+        <e p="GameDemo.cs" t="Include" />
+        <e p="GameEvent.cs" t="Include" />
+        <e p="Player.cs" t="Include" />
+        <e p="Team.cs" t="Include" />
+      </e>
+      <e p="Middlewares" t="Include">
+        <e p="ErrorHandlingMiddleware.cs" t="Include" />
+      </e>
+      <e p="Migrations" t="Include">
+        <e p="20201208201408_Initial.cs" t="Include" />
+        <e p="20201208201408_Initial.Designer.cs" t="Include" />
+        <e p="20201213115806_Ini2.cs" t="Include" />
+        <e p="20201213115806_Ini2.Designer.cs" t="Include" />
+        <e p="DataLunaDbContextModelSnapshot.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netcoreapp3.1" t="Include">
+            <e p="DataLuna.Back.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Persistence" t="Include">
+        <e p="Configurations" t="Include">
+          <e p="FinishedMatchEntityConfiguration.cs" t="Include" />
+          <e p="GameDemoEntityConfiguration.cs" t="Include" />
+          <e p="GameEventEntityConfiguration.cs" t="Include" />
+          <e p="PlayerEntityConfiguration.cs" t="Include" />
+          <e p="TeamEntityConfiguration.cs" t="Include" />
+        </e>
+        <e p="DataLunaDbContext.cs" t="Include" />
+      </e>
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="launchSettings.json" t="Include" />
+      </e>
+      <e p="Services" t="Include">
+        <e p="Admin" t="Include">
+          <e p="AdminPlayerService.cs" t="Include" />
+          <e p="AdminTeamsService.cs" t="Include" />
+          <e p="IAdminPlayerService.cs" t="Include" />
+          <e p="IAdminTeamsService.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Startup.cs" t="Include" />
+    </e>
+    <e p="C:\Users\PC\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\PC\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+  </component>
+</project>
