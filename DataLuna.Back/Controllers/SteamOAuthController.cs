@@ -18,7 +18,7 @@ namespace DataLuna.Back.Controllers
         }
         
         [HttpGet("steamCallback")]
-        public async Task<IActionResult> SteamCallbackEndpoint()
+        public IActionResult SteamCallbackEndpoint()
         {
             _logger.LogError("LOGGING CLAIMS");
             foreach (var claim in HttpContext.User.Claims)
@@ -26,7 +26,7 @@ namespace DataLuna.Back.Controllers
                 _logger.LogError($"{claim.Type} : \n {claim.Value}");
             }
             
-            return Ok();
+            return Redirect("/swagger");
         }
         
         [HttpGet("redirect")]
