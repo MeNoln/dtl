@@ -32,7 +32,8 @@ namespace DataLuna.Back.Persistence
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseNpgsql("host=localhost;port=5432;database=csgo_db;username=postgres;password=1234");
+                //optionsBuilder.UseNpgsql("host=localhost;port=5432;database=csgo_db;username=postgres;password=1234");
+                optionsBuilder.UseNpgsql("host=rc1b-k29oylptgdr996zf.mdb.yandexcloud.net;port=6432;database=dataluna_db;username=dataluna_user;password=c8051d3491bee7d9c0a6bcdb;sslmode=verify-full;target_session_attrs=read-write");
         }
     }
 }

@@ -3,15 +3,18 @@ using System.Net;
 using System.Threading.Tasks;
 using DataLuna.Back.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace DataLuna.Back.Middlewares
 {
     public class ErrorHandlingMiddleware
     {
+        private readonly ILogger<ErrorHandlingMiddleware> _logger;
         private readonly RequestDelegate _next;
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger, RequestDelegate next)
         {
+            _logger = logger;
             _next = next;
         }
 
@@ -23,6 +26,7 @@ namespace DataLuna.Back.Middlewares
             }
             catch (System.Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 await HandleExceptionAsync(context, ex);
             }
         }

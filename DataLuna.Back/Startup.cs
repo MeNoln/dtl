@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataLuna.Back.Middlewares;
+using DataLuna.Back.Infrastructure;
 using DataLuna.Back.Persistence;
 using DataLuna.Back.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -16,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using AspNetCore.Yandex.ObjectStorage;
 
 namespace DataLuna.Back
 {
@@ -30,8 +32,17 @@ namespace DataLuna.Back
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataLunaDbContext>(options => 
-                options.UseNpgsql(Configuration.GetConnectionString("DataLunaDatabase")));
+            bool injectLocalContext = bool.Parse(Configuration["UseLocalDb"]);
+            if (injectLocalContext)
+            {
+                services.AddDbContext<DataLunaDbContext>(options => 
+                    options.UseNpgsql(Configuration.GetConnectionString("DataLunaDatabase")));
+            }
+            else
+            {
+                services.AddDbContext<DataLunaDbContext>(options => 
+                    options.UseNpgsql(Configuration.GetConnectionString("DataLunaDatabaseRemote")));
+            }
 
             services.AddLogging();
             
@@ -51,7 +62,16 @@ namespace DataLuna.Back
                     options.LogoutPath = "/signout";
                 })
                 .AddSteam();
+
+            services.AddScoped<IYandexStorage, YandexStorage>();
+            services.AddYandexObjectStorage(o => 
+            {
+                o.BucketName = "datalunaimagebucket";
+                o.AccessKey = "6yyHcnpFGKUjFe1YZ9R3";
+                o.SecretKey = "m35StLq68Hwmn7QsNWbe5GeSamwfxbfhelqzpx0f";
+            });
             
+            services.AddCors();
             services.AddControllers()
                 .AddJsonOptions(o => o.JsonSerializerOptions.IgnoreNullValues = true);
             
@@ -68,11 +88,18 @@ namespace DataLuna.Back
                 app.UseDeveloperExceptionPage();
             }
             
-            app.UseStaticFiles();
-
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
+            app.UseStaticFiles();
+
             app.UseRouting();
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+            });
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -82,11 +109,15 @@ namespace DataLuna.Back
                 endpoints.MapControllers();
             });
             
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
+            bool swaggerEnable = bool.Parse(Configuration["SwaggerEnable"]);
+            if (swaggerEnable)
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "DataLuna API");
-            });
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DataLuna API");
+                });
+            }
         }
     }
 }

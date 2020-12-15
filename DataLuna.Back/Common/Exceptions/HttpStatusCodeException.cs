@@ -8,12 +8,10 @@ namespace DataLuna.Back.Common.Exceptions
     public class HttpStatusCodeException : Exception
     {
         public HttpStatusCode StatusCode { get; }
-        public string Message { get; }
 
-        public HttpStatusCodeException(HttpStatusCode code, string message)
+        public HttpStatusCodeException(HttpStatusCode code, string message = "") : base(message)
         {
             StatusCode = code;
-            Message = message;
         }
     }
 }
