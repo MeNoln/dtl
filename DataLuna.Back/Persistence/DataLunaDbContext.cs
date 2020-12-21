@@ -18,7 +18,6 @@ namespace DataLuna.Back.Persistence
         public DbSet<Team> Teams { get; set; }
         public DbSet<GameEvent> Events { get; set; }
         public DbSet<GameDemo> Demos { get; set; }
-        public DbSet<FinishedMatch> FinishedMatches { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,7 +25,6 @@ namespace DataLuna.Back.Persistence
             modelBuilder.ApplyConfiguration(new TeamEntityConfiguration());
             modelBuilder.ApplyConfiguration(new GameEventEntityConfiguration());
             modelBuilder.ApplyConfiguration(new GameDemoEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new FinishedMatchEntityConfiguration());
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

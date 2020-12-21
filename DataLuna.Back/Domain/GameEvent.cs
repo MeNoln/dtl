@@ -1,4 +1,5 @@
 ﻿using System;
+using DataLuna.Back.Domain.Enum;
 
 namespace DataLuna.Back.Domain
 {
@@ -8,6 +9,7 @@ namespace DataLuna.Back.Domain
         public long TeamAId { get; set; }
         public long TeamBId { get; set; }
         public DateTime EventDate { get; set; }
+        public EventStatus Status { get; set; }
 
         public Team TeamA { get; set; }
         public Team TeamB { get; set; }

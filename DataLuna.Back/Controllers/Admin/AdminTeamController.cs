@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace DataLuna.Back.Controllers.Admin
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("admin/team")]
     [AdminAuthorize]
     public class AdminTeamController : ControllerBase
     {

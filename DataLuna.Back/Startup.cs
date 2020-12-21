@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLuna.Back.Middlewares;
 using DataLuna.Back.Infrastructure;
+using DataLuna.Back.Infrastructure.DemoParse;
 using DataLuna.Back.Persistence;
 using DataLuna.Back.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -49,6 +50,7 @@ namespace DataLuna.Back
             //Admin services
             services.AddScoped<IAdminTeamsService, AdminTeamsService>();
             services.AddScoped<IAdminPlayerService, AdminPlayerService>();
+            services.AddScoped<IAdminEventService, AdminEventService>();
             
             //User services
 
@@ -63,6 +65,8 @@ namespace DataLuna.Back
                 })
                 .AddSteam();
 
+            //Infrastructure
+            services.AddScoped<IDemoParseProvider, DemoParseProvider>();
             services.AddScoped<IYandexStorage, YandexStorage>();
             services.AddYandexObjectStorage(o => 
             {

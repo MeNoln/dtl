@@ -10,10 +10,10 @@ using DataLuna.Back.Common.AdminUsers;
 namespace DataLuna.Back.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class AdminAutorizationController : ControllerBase
+    [Route("admin/auth")]
+    public class AdminAuthorizationController : ControllerBase
     {
-        [HttpPost("SignIn")]
+        [HttpPost("signin")]
         public IActionResult SignIn([FromBody]AdminSignInCommand command)
         {
             var admin = AdminsCollection.Admins.FirstOrDefault(f => (f.Login, f.Password) == (command.Login, command.Password));

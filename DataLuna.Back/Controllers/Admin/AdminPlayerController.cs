@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 namespace DataLuna.Back.Controllers.Admin
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("admin/player")]
     [AdminAuthorize]
     public class AdminPlayerController : ControllerBase
     {
