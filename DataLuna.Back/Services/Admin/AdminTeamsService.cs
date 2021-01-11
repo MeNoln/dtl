@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DataLuna.Back.Common.Teams;
 using DataLuna.Back.Common.Exceptions;
 using DataLuna.Back.Domain;
+using DataLuna.Back.Domain.Enum;
 using DataLuna.Back.Persistence;
 using DataLuna.Back.Extensions;
 using DataLuna.Back.Infrastructure;
@@ -38,21 +39,26 @@ namespace DataLuna.Back.Services
             };
         }
 
-        public Task<TeamDto> GetTeamById(long id)
-            => _dbContext.Teams.AsNoTracking()
+        public async Task<TeamDto> GetTeamById(long id)
+        {
+            var team = await _dbContext.Teams.AsNoTracking()
                 .Include(i => i.Players)
-                .Where(w => w.Id == id)
-                .Select(s => new TeamDto
-                    {
-                        Name = s.Name,
-                        ImagePath = s.ImagePath,
-                        Players = s.Players.Select(ss => new TeamPlayerDto
-                        {
-                            NickName = ss.NickName,
-                        }).ToArray()
-                    }
-                )
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(f => f.Id == id);
+
+            return new TeamDto
+            {
+                Name = team.Name,
+                ImagePath = team.ImagePath,
+                Players = new TeamPlayersDto
+                {
+                    Igl = team.Players.FirstOrDefault(f => f.Role == PlayerRole.Igl)?.NickName,
+                    Lurk = team.Players.FirstOrDefault(f => f.Role == PlayerRole.Lurk)?.NickName,
+                    Support = team.Players.FirstOrDefault(f => f.Role == PlayerRole.Support)?.NickName,
+                    Sniper = team.Players.FirstOrDefault(f => f.Role == PlayerRole.Sniper)?.NickName,
+                    Entry = team.Players.FirstOrDefault(f => f.Role == PlayerRole.Entry)?.NickName,
+                }
+            };
+        }
 
         public Task CreateTeam(CreateTeamCommand command)
         {
@@ -80,7 +86,7 @@ namespace DataLuna.Back.Services
         {
             var team = await GetDomainTeam(teamId);
 
-            string cloudImagePath = await _storageService.UploadPlayerImageToCloud(image.OpenReadStream(), image.FileName, FolderPathEnum.Team);
+            string cloudImagePath = await _storageService.UploadPlayerImageToCloud(image, FolderPathEnum.Team);
             team.ImagePath = cloudImagePath;
 
             _dbContext.Teams.Update(team);

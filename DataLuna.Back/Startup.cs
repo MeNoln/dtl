@@ -76,8 +76,7 @@ namespace DataLuna.Back
             });
             
             services.AddCors();
-            services.AddControllers()
-                .AddJsonOptions(o => o.JsonSerializerOptions.IgnoreNullValues = true);
+            services.AddControllers();
             
             services.AddSwaggerGen(c =>
             {

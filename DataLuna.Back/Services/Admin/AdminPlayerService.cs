@@ -32,7 +32,7 @@ namespace DataLuna.Back.Services
                     Team = s.Team.Name,
                     NickName = s.NickName,
                     Name = s.Name,
-                    Lastname = s.Surname,
+                    Lastname = s.Lastname,
                     ImagePath = s.ImagePath,
                 })
                 .ToArrayAsync();
@@ -54,7 +54,7 @@ namespace DataLuna.Back.Services
                     NickName = s.NickName,
                     SteamId = s.SteamId,
                     Name = s.Name,
-                    Lastname = s.Surname,
+                    Lastname = s.Lastname,
                     Country = "stub",
                     ImagePath = s.ImagePath,
                 })
@@ -67,8 +67,9 @@ namespace DataLuna.Back.Services
                 TeamId = command.TeamId,
                 NickName = command.NickName,
                 SteamId = command.SteamId,
-                Surname = command.Surname,
+                Lastname = command.Lastname,
                 Name = command.Name,
+                Role = command.Role,
             };
 
             _dbContext.Add(player);
@@ -80,7 +81,7 @@ namespace DataLuna.Back.Services
         {
             var player = await GetDomainPlayer(playerId);
 
-            string cloudImagePath = await _storageService.UploadPlayerImageToCloud(image.OpenReadStream(), image.FileName, FolderPathEnum.Player);
+            string cloudImagePath = await _storageService.UploadPlayerImageToCloud(image, FolderPathEnum.Player);
             player.ImagePath = cloudImagePath;
 
             _dbContext.Players.Update(player);

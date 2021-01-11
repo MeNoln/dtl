@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using DataLuna.Back.Infrastructure.Internal;
 using AspNetCore.Yandex.ObjectStorage;
 
@@ -14,7 +15,7 @@ namespace DataLuna.Back.Infrastructure
         public YandexStorage(YandexStorageService yandexProvider)
             => (_yandexProvider) = (yandexProvider);
 
-        public Task<string> UploadPlayerImageToCloud(Stream fileStream, string fileName, FolderPathEnum path)
+        public async Task<string> UploadPlayerImageToCloud(IFormFile image, FolderPathEnum path)
         {
             string folder = path switch
             {
@@ -23,7 +24,8 @@ namespace DataLuna.Back.Infrastructure
                 _ => throw new Exception("Unhandled folder path."),
             };
 
-            return _yandexProvider.PutObjectAsync(fileStream, string.Format("{0}/{1}", folder, fileName));
+            using var fileStream = image.OpenReadStream();
+            return await _yandexProvider.PutObjectAsync(fileStream, string.Format("{0}/{1}", folder, image.FileName));
         }
     }
 }

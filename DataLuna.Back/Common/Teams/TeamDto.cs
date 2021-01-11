@@ -6,11 +6,15 @@
         public string Name { get; set; }
         public string ImagePath { get; set; }
 
-        public TeamPlayerDto[] Players { get; set; }
+        public TeamPlayersDto Players { get; set; }
     }
 
-    public class TeamPlayerDto
+    public class TeamPlayersDto
     {
-        public string NickName { get; set; }
+        public string Igl { get; set; }
+        public string Lurk { get; set; }
+        public string Support { get; set; }
+        public string Sniper { get; set; }
+        public string Entry { get; set; }
     }
 }
