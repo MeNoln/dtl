@@ -7,6 +7,7 @@ namespace DataLuna.Back.Common.Events
     {
         public long TeamAId { get; set; }
         public long TeamBId { get; set; }
+        public DateTime EventDate { get; set; }
         public EventStatus Status { get; set; }
     }
 }

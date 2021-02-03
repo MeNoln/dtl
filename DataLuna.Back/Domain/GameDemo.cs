@@ -6,6 +6,7 @@
         public long TeamAId { get; set; }
         public long TeamBId { get; set; }
         public string DemoData { get; set; }
+        public System.DateTime DateCreated { get; set; }
 
         public Team TeamA { get; set; }
         public Team TeamB { get; set; }

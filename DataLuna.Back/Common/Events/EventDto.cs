@@ -12,5 +12,7 @@ namespace DataLuna.Back.Common.Events
         
         [JsonConverter(typeof(StringEnumConverter))]
         public EventStatus Status { get; set; }
+        public string TeamAName { get; set; }
+        public string TeamBName { get; set; }
     }
 }

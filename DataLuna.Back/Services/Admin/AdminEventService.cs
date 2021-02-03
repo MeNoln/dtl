@@ -35,11 +35,15 @@ namespace DataLuna.Back.Services
 
         public Task<EventDto> GetEvent(long eventId)
             => _dbContext.Events.AsNoTracking()
+                .Include(c => c.TeamA)
+                .Include(c => c.TeamB)
                 .Where(w => w.Id == eventId)
                 .Select(s => new EventDto
                 {
                     EventDate = s.EventDate,
                     Status = s.Status,
+                    TeamAName = s.TeamA.Name,
+                    TeamBName = s.TeamB.Name,
                 })
                 .FirstOrDefaultAsync();
 
@@ -49,7 +53,7 @@ namespace DataLuna.Back.Services
             {
                 TeamAId = command.TeamAId,
                 TeamBId = command.TeamBId,
-                EventDate = DateTime.UtcNow,
+                EventDate = command.EventDate,
                 Status = command.Status,
             };
 

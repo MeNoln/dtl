@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DataLuna.Back.Common.Players;
 using DataLuna.Back.Services;
 using DataLuna.Back.Common.Attributes;
+using DataLuna.Back.Common.DemoParserProxy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 
@@ -13,16 +14,18 @@ namespace DataLuna.Back.Controllers.Admin
     [AdminAuthorize]
     public class AdminDemoController : ControllerBase
     {
-        [HttpGet("preparse")]
-        public IActionResult PreParseDemo()
+        private readonly IAdminDemoService _demoService;
+        public AdminDemoController(IAdminDemoService demoService)
         {
-            return Ok(new {message = "stub"});
+            _demoService = demoService;
         }
 
-        [HttpGet("parse")]
-        public IActionResult ParseDemo()
+        [HttpPost("savedemo")]
+        public async Task<IActionResult> SaveDemo([FromBody]NewDemoCommand demo)
         {
-            return Ok(new {message = "stub"});
+            await _demoService.SaveDemoData(demo);
+
+            return Ok();
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using DataLuna.Back.Common.AdminUsers;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DataLuna.Back.Controllers
 {

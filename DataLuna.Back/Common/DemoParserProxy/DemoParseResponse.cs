@@ -1,6 +1,6 @@
 using System;
 
-namespace DataLuna.Back.Infrastructure.DemoParse.Internal
+namespace DataLuna.Back.Common.DemoParserProxy
 {
     public class DemoParseResponse
     {

@@ -18,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.Annotations;
 using AspNetCore.Yandex.ObjectStorage;
 
 namespace DataLuna.Back
@@ -51,8 +52,10 @@ namespace DataLuna.Back
             services.AddScoped<IAdminTeamsService, AdminTeamsService>();
             services.AddScoped<IAdminPlayerService, AdminPlayerService>();
             services.AddScoped<IAdminEventService, AdminEventService>();
+            services.AddScoped<IAdminDemoService, AdminDemoService>();
             
             //User services
+            services.AddScoped<IClientEventService, ClientEventService>();
 
             services.AddAuthentication(options =>
                 {
@@ -74,12 +77,16 @@ namespace DataLuna.Back
                 o.AccessKey = "6yyHcnpFGKUjFe1YZ9R3";
                 o.SecretKey = "m35StLq68Hwmn7QsNWbe5GeSamwfxbfhelqzpx0f";
             });
+
+            services.AddHttpClient(Constants.Clients.DemoParseClient, 
+                client => client.BaseAddress = new Uri(Configuration["DemoParseClientUrl"]));
             
             services.AddCors();
             services.AddControllers();
             
             services.AddSwaggerGen(c =>
             {
+                c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DataLuna API", Version = "v1" });
             });
         }
@@ -96,6 +103,7 @@ namespace DataLuna.Back
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseHttpsRedirection();
 
             app.UseCors(builder =>
             {
