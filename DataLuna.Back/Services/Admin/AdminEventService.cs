@@ -55,11 +55,23 @@ namespace DataLuna.Back.Services
                 TeamBId = command.TeamBId,
                 EventDate = command.EventDate,
                 Status = command.Status,
+                EventType = command.Type,
+                Name = command.Name,
             };
 
             _dbContext.Events.Add(gameEvent);
 
             return _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateTwitchLink(int eventId, UpdateTwtichLinkCommand command)
+        {
+            var ev = await _dbContext.Events.FirstOrDefaultAsync();
+            if (ev == null)
+                throw new HttpStatusCodeException(HttpStatusCode.NotFound);
+
+            ev.TwitchLink = command.Url;
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task UpdateEventStatus(UpdateEventStatusCommand command)

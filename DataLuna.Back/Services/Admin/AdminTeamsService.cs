@@ -65,6 +65,7 @@ namespace DataLuna.Back.Services
             var team = new Team
             {
                 Name = command.Name,
+                Rank = command.Rank,
             };
 
             _dbContext.Teams.Add(team);

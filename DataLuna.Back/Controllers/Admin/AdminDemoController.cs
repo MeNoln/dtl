@@ -11,7 +11,7 @@ namespace DataLuna.Back.Controllers.Admin
 {
     [ApiController]
     [Route("admin/demo")]
-    [AdminAuthorize]
+    //[AdminAuthorize]
     public class AdminDemoController : ControllerBase
     {
         private readonly IAdminDemoService _demoService;
@@ -26,6 +26,12 @@ namespace DataLuna.Back.Controllers.Admin
             await _demoService.SaveDemoData(demo);
 
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDemos()
+        {
+            return Ok(await _demoService.GetDemos());
         }
     }
 }

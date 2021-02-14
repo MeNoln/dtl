@@ -12,6 +12,7 @@ namespace DataLuna.Back.Domain
         public long Id { get; set; }
         public string Name { get; set; }
         public string ImagePath { get; set; }
+        public int Rank { get; set; }
 
         public ICollection<Player> Players { get; set; }
     }

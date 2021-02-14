@@ -39,6 +39,13 @@ namespace DataLuna.Back.Controllers.Admin
             return Ok();
         }
 
+        [HttpPut("settwitchlink/{id}")]
+        public async Task<IActionResult> SetTwitchLink([FromRoute]int id, [FromBody]UpdateTwtichLinkCommand command)
+        {
+            await _eventService.UpdateTwitchLink(id, command);
+            return Ok();
+        }
+
         [HttpPut("changestatus")]
         public async Task<IActionResult> ChangeEventStatus([FromBody]UpdateEventStatusCommand command)
         {

@@ -10,6 +10,9 @@ namespace DataLuna.Back.Domain
         public long TeamBId { get; set; }
         public DateTime EventDate { get; set; }
         public EventStatus Status { get; set; }
+        public EventType EventType { get; set; }
+        public string TwitchLink { get; set; }
+        public string Name { get; set; }
 
         public Team TeamA { get; set; }
         public Team TeamB { get; set; }

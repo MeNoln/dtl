@@ -17,6 +17,7 @@ namespace DataLuna.Back.Common.DemoParserProxy
 
     public class DemoParseTeam
     {
+        public long TeamId { get; set; }
         public string TeamName { get; set; }
         public TeamComparison TeamComparison { get; set; }
     }
