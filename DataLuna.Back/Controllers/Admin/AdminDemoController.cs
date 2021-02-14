@@ -11,7 +11,7 @@ namespace DataLuna.Back.Controllers.Admin
 {
     [ApiController]
     [Route("admin/demo")]
-    //[AdminAuthorize]
+    [AdminAuthorize]
     public class AdminDemoController : ControllerBase
     {
         private readonly IAdminDemoService _demoService;
