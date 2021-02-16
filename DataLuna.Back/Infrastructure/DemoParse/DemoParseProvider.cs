@@ -19,7 +19,7 @@ namespace DataLuna.Back.Infrastructure.DemoParse
 
         public async Task<GetStatusResponse[]> GetDemosStatus()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "state");
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/v1/state");
             var client = _clientFactory.CreateClient(Constants.Clients.DemoParseClient);
 
             try
@@ -47,7 +47,7 @@ namespace DataLuna.Back.Infrastructure.DemoParse
 
         public async Task<DemoParseResponse> ParseDemo(DemoParseCommand command)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "preparse")
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/preparse")
             {
                 Content = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json")
             };
@@ -78,7 +78,7 @@ namespace DataLuna.Back.Infrastructure.DemoParse
 
         public async Task<PreParseResponse[]> PreParseDemo(PreParseCommand command)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "demodata")
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/demodata")
             {
                 Content = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json")
             };
