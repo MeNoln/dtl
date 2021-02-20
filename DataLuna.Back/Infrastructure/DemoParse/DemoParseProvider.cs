@@ -47,7 +47,7 @@ namespace DataLuna.Back.Infrastructure.DemoParse
 
         public async Task<DemoParseResponse> ParseDemo(DemoParseCommand command)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/preparse")
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/demodata")
             {
                 Content = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json")
             };
@@ -78,7 +78,7 @@ namespace DataLuna.Back.Infrastructure.DemoParse
 
         public async Task<PreParseResponse[]> PreParseDemo(PreParseCommand command)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/demodata")
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/preparse")
             {
                 Content = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json")
             };

@@ -4,6 +4,6 @@ namespace DataLuna.Back.Common.DemoParserProxy
 {
     public class PreParseCommand
     {
-        public string Url { get; set; }
+        public string url { get; set; }
     }
 }

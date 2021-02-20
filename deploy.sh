@@ -11,15 +11,15 @@ docker push cr.yandex/crpdcqv18l8nis2ebeu3/dtlback:1.0
 #remote host
 IAM_TOKEN=$(yc iam create-token)
 
-ssh dtluser@84.201.148.252 sudo docker login --username iam --password $IAM_TOKEN cr.yandex
+ssh dtluser@178.154.248.219 sudo docker login --username iam --password $IAM_TOKEN cr.yandex
 
-ssh dtluser@84.201.148.252 sudo docker pull cr.yandex/crpdcqv18l8nis2ebeu3/dtlback:1.0
+ssh dtluser@178.154.248.219 sudo docker pull cr.yandex/crpdcqv18l8nis2ebeu3/dtlback:1.0
 
-ssh dtluser@84.201.148.252 sudo docker stop dtlback
+ssh dtluser@178.154.248.219 sudo docker stop dtlback
 
-ssh dtluser@84.201.148.252 sudo docker rm dtlback
+ssh dtluser@178.154.248.219 sudo docker rm dtlback
 
-ssh dtluser@84.201.148.252 sudo docker run -p 5000:5000 -d --name dtlback cr.yandex/crpdcqv18l8nis2ebeu3/dtlback:1.0
+ssh dtluser@178.154.248.219 sudo docker run -p 5000:5000 -d --name dtlback cr.yandex/crpdcqv18l8nis2ebeu3/dtlback:1.0
 
 rm -r ./app
 
