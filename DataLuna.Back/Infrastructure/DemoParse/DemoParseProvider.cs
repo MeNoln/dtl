@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.Net;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -45,7 +46,7 @@ namespace DataLuna.Back.Infrastructure.DemoParse
             }
         }
 
-        public async Task<DemoParseResponse> ParseDemo(DemoParseCommand command)
+        public async Task<List<DemoParseResponse>> ParseDemo(DemoParseCommand command)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/demodata")
             {
@@ -60,7 +61,7 @@ namespace DataLuna.Back.Infrastructure.DemoParse
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return JsonConvert.DeserializeObject<DemoParseResponse>(responseString);
+                    return JsonConvert.DeserializeObject<List<DemoParseResponse>>(responseString);
                 }
 
                 throw new HttpStatusCodeException(response.StatusCode, responseString);
